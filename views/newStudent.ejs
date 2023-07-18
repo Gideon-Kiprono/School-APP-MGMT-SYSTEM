@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Student</title>
+</head>
+<body>
+  <h1>New Student</h1>
+  <form action="/newStudent" method="post">
+    <div>
+      <label for="reg-no">Registration Number</label>
+      <input type="number" name="reg-no" id="reg-no">
+    </div>
+    <div>
+      <label for="full-name">Full Name</label>
+      <input type="text">
+    </div>
+    <div>
+      <label for="class">Class</label>
+      <select name="class" id="class">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <div>
+        <input type="submit"value ="Add New Student">
+      </div>
+    </div>
+  </form>
+</body>
+</html>

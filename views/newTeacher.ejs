@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add new Staff</title>
+</head>
+<body>
+  <h1>Add New Staff</h1>
+  <form action="/addStaff" method="post">
+    <div>
+      <label for="tsc">TSC NO</label>
+      <input type="number">
+    </div>
+    <div>
+      <label for="name">Full name</label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div>
+      <label for="phone">Phone</label>
+      <input type="number" name="phone" id="phone">
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email">
+    </div>
+    <div>
+      <label for="pass">Password</label>
+      <input type="password" name="pass" id="pass">
+    </div>
+    <div>
+      <label for="role">Role</label>
+      <select name="role" id="role">
+        <option value="teacher">Teacher</option>
+        <option value="classteacher">Class Teacher</option>
+        <option value="security">Security</option>
+        <option value="principal">Principal</option>
+      </select>
+    </div>
+    <div>
+      <input type="submit" value="Add New Staff">
+    </div>
+  </form>
+</body>
+</html>

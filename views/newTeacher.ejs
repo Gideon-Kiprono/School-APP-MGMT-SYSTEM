@@ -6,11 +6,12 @@
   <title>Add new Staff</title>
 </head>
 <body>
+  <%-include("_header.ejs")%>
   <h1>Add New Staff</h1>
   <form action="/addStaff" method="post">
     <div>
       <label for="tsc">TSC NO</label>
-      <input type="number">
+      <input type="number" name="tsc">
     </div>
     <div>
       <label for="name">Full name</label>

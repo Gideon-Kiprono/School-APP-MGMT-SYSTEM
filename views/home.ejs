@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
   <%- include("_header.ejs")%>
-  <h1>Home Page</h1>
   <div class="container">
+  <h1>Home Page</h1>
+  <img src="images/1.jpg" alt="team">
   <div class="present">
     <p class="teacher">Teachers  </p>
     <!-- <p class="student"> <%=//numberOfStudents %>  Students </p>
@@ -19,16 +20,8 @@
     <p class="teacher"> 2 teachers present</p>
     <p class="student"> 50 Students present</p>
   </div>
-  </div>
-  <!-- 7 teachers present -->
-  <!-- 20 students absent -->
-
-  <!-- section absentees -- student and teachers -->
-
-  <!-- other pages -->
-  <!-- attendance page -->
-  <!-- permissions page -->
-
+  <div class="container_content">
+  <div class="teacher">
   <h2>Teacher Attendance</h2>
   <table>
     <tr>
@@ -45,7 +38,8 @@
       </tr>
     <% }); %>
   </table>
-
+  </div>
+  <div class="student">
   <h2>Student Attendance</h2>
   <table>
     <tr>
@@ -61,5 +55,8 @@
       </tr>
       <% } %>
   </table>
+  </div>
+  </div>
+  </div>
 </body>
 </html>

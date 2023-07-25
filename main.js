@@ -8,11 +8,20 @@ var conn = mysql.createConnection({
 });
 
 const app = express();
-app.use(express.static("public"));
-//Middleware
+//middleware
+app.use(express.static("public")); //Static files middeware
+app.use(midfunc);
 app.use(express.urlencoded({ extended: false })); //supply req.body with the form data
 //server static files in express
 const port = process.env.port || 3003;
+
+function midfunc(req, res, next) {
+  console.log(req.path);
+  console.log("I am a midleware function!");
+  //Logic --e.g. authorization
+  next();
+}
+
 app.get("/", (req, res) => {
   conn.query("SELECT * FROM  students", (sqlerr1, students) => {
     if (!sqlerr1) {
@@ -74,6 +83,28 @@ app.get("/newStudent", (req, res) => {
   res.render("newStudent.ejs");
   console.log("new student added");
 });
+app.get("/login", (req, res) => {
+  res.render("login.ejs");
+  console.log('Login page ready!!');
+})
+
+//POST ROUTES
+
+app.post("/login", () => {
+  //save the data to db and compare if the deatails exists so as to accept the request for access
+  //redirect user to home route
+  //const email = req.body["login-email"];
+  //const password = req.body["login-password"];
+
+  // Validate the submitted email and password (You can add more validation here)
+  // if (!email || !password) {
+  //    res.send("Wrong Password/email");
+  // } else {
+  //   res.redirect("/")
+  // }
+  // console.log(req.body);
+})
+
 app.post("/addnewStudent", (req, res) => {
   //save the data to db
   console.log(req.body);

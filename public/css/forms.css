@@ -1,0 +1,30 @@
+h1{
+  text-align: center;
+  text-transform: uppercase;
+}
+.container{
+  width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+ .container label,
+  .container input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+    }
+
+    .container input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container input[type="submit"]:hover {
+      background-color: #0056b3;
+    }

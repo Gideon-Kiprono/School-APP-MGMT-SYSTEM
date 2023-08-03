@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>SAMS</title>
+  <link rel="icon" type="image/png" href="/public/images/icons8-school-16.png">
+  
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
   <%- include("_header.ejs")%>
   <div class="container">
   <h1>Home Page</h1>
-  <img src="images/1.jpg" alt="team">
-  <div class="present">
-    <p class="teacher">Teachers  </p>
-    <!-- <p class="student"> <%=//numberOfStudents %>  Students </p>
-    <p class="student"><%=//presentStudents %> Present Students</p> -->
-  </div>
-  <div class="absentees">
-    <p class="teacher"> 2 teachers present</p>
-    <p class="student"> 50 Students present</p>
-  </div>
+  <% if(locals.user){%>
+    <h2>Welcome <%= user.full_mame  %></h2>
+    <% }else{ %>
+      <h2>Welcome to SAMS</h2>
+      <% } %>
+  
   <div class="container_content">
   <div class="teacher">
   <h2>Teacher Attendance</h2>

@@ -2,10 +2,18 @@
   <h1>SAMS</h1>
   <nav>
     <a href="/">Home</a>
+
+    <% if(locals.user && locals.user.role === "principal"){%>
+      <a href="/permissions">Permissions</a>
+      <% } %>
     <a href="/newStudent">+ New student</a>
     <a href="/newStaff">+ New Staff</a>
     <a href="/news/sports/epl-transfers">Blog</a>
-    <a href="/login">Login</a>
+    <% if(locals.user){%>
+      <a href="/logout">Log Out</a>
+      <% }else{%>
+    <a href="/login">Sign In</a>
+    <% } %>
   </nav>
 </header>
 

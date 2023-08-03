@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permissions</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/permissions.css">
+</head>
+<body>
+  <%- include('_header.ejs')  %>
+  <h2 class="main.h">Permissions</h2>
+  <div class="flex">
+    <div class="all-p">
+      <table>
+        <tr>
+          <th>TSC No</th>
+          <th>Name</th>
+          <th>Reason</th>
+          <th>Time Out</th>
+          <th>Expected Time In</th>
+        </tr>
+        <%Permissions.forEach(perm=>{ %>
+          <tr>
+            <td><%= perm.tsc_no %></td>
+            <td><%= perm.full_mame %></td>
+            <td><%= perm.reason %></td>
+            <td><%= perm.time_out %></td>
+            <td><%= perm.exp_tme_in %></td>
+          </tr>
+          <% }) %>
+      </table>
+    </div>
+    <div class="new-p">
+      <form action="/permission" method="post">
+        <label for="tsc">TSC NO</label>
+        <select name="tsc" id="tsc">
+          <option value="">--Choose tsc no</option>
+          <%Numbers.forEach(num=>{ %>
+            <option value="<%=num.tsc_no %>"><%=num.tsc_no %></option>
+            <% }) %>
+        </select>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

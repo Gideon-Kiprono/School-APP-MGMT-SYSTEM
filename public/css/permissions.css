@@ -1,0 +1,9 @@
+.flex{
+  display: flex;
+}
+.all-p{
+  flex: 3;
+}
+.new-p{
+  flex: 1;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>401 error</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <style>
+    .cont{
+      height: 300px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: orangered;
+    }
+  </style>
+</head>
+<body>
+   <%-include("_header.ejs")%>
+  <div class="cont">
+  <h1>401 You are not logged in</h1>
+  <a href="/login">login</a>
+  </div>
+</body>
+</html>

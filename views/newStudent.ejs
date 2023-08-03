@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Student</title>
   <link rel="stylesheet" href="/css/main.css">
+  <!-- <link rel="stylesheet" href="/css/forms.css"> -->
 </head>
 <body>
   <%-include("_header.ejs")%>
   <h1>New Student</h1>
+  <div class="container">
   <form action="/addnewStudent" method="post">
     <div>
       <label for="reg_no">Registration Number</label>
@@ -31,6 +33,7 @@
       </div>
     </div>
   </form>
+  </div>
   <!-- cors role -->
 </body>
 </html>

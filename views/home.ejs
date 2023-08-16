@@ -26,6 +26,9 @@
       <th>Teacher Name</th>
       <th>Phone</th>
       <th>Role</th>
+      <% if( locals.user?.role==="principal"){ %>
+      <th>Actions</th>
+      <% } %>
     </tr>
     <% teachers.forEach(t => {%>
       
@@ -33,6 +36,10 @@
         <td><%= t.full_mame %></td>
         <td><%= t.phone %></td>
         <td><%= t.role %></td>
+
+        <% if( locals.user?.role==="principal"){ %>
+        <td > <a href="/delete/<%= t.tsc_no%>">Delete</a></td>
+        <% } %>
       </tr>
     <% }); %>
   </table>

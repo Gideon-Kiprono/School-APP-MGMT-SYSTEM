@@ -4,7 +4,16 @@
     <a href="/">Home</a>
 
     <% if(locals.user && locals.user.role === "principal"){%>
-      <a href="/permissions">Permissions</a>
+      <a href="/permissions"> Permissions</a>
+      <a href="/attendance"> Attendance</a>
+      <% } %>
+      <% if(locals.user && locals.user.role === "classteacher"){%>
+      <a href="/Studentpermissions"> Permissions</a>
+      <% } %>
+
+
+      <% if(locals.user && locals.user.role === "security"){%>
+      <a href="/attendance"> Attendance</a>
       <% } %>
     <a href="/newStudent">+ New student</a>
     <a href="/newStaff">+ New Staff</a>

@@ -36,8 +36,7 @@ function authFunc(req, res, next) {
   let protectedRoutes = ["/permissions", "/newStaff", "/newStudent"];
   console.log(protectedRoutes.includes(req.path));
   if (protectedRoutes.includes(req.path) && !req.session.staff) {
-    res.status(401).res.render("401.ejs");
-    
+    res.status(401).render("401.ejs");
   } else {
     next();
   }
@@ -121,6 +120,21 @@ app.get("/logout", (req, res) => {
   });
   // console.log('Login page ready!!');
 });
+app.get("/delete/:num", (req, res) => {
+  conn.query(
+    "DELETE FROM teachers WHERE tsc_no=?",
+    [Number(req.params.num)],
+    (sqlerr) => {
+      if (sqlerr) {
+        res.send("SQL error");
+        console.log(sqlerr);
+      } else {
+        res.redirect("/");
+      }
+    }
+  );
+});
+
 app.get("/permissions", (req, res) => {
   conn.query(
     "SELECT * FROM `teacher_permission` JOIN teachers ON teacher_permission.tsc_no =teachers.tsc_no",
@@ -128,19 +142,111 @@ app.get("/permissions", (req, res) => {
       if (sqlerr) {
         res.send("Database Error");
       } else {
-        conn.query("SELECT tsc_no FROM teachers", (sqlerr, numbers) => {
-          res.render("permissions.ejs", {
-            Permissions: data,
-            Numbers: numbers,
-          });
-        });
+        conn.query(
+          "SELECT tsc_no,full_mame FROM teachers",
+          (sqlerr, numbers) => {
+            res.render("permissions.ejs", {
+              Permissions: data,
+              Numbers: numbers,
+            });
+          }
+        );
+      }
+    }
+  );
+});
+
+app.get("/Studentpermissions", (req, res) => {
+  conn.query(
+    "SELECT * FROM student_permission JOIN students ON student_permission.reg_no = students.reg_no",
+    (sqlerr, data) => {
+      if (sqlerr) {
+        res.send("Database error!");
+      } else {
+        conn.query(
+          "SELECT reg_no,fullname FROM students",
+          (sqlerr, numbers) => {
+            res.render("student_permision.ejs", {
+              permissions: data,
+              numbers: numbers,
+            });
+          }
+        );
+      }
+    }
+  );
+});
+app.get("/attendance", (req, res) => {
+  conn.query(
+    "SELECT * FROM teacher_attendance JOIN teachers ON teacher_attendance.tsc_no =teachers.tsc_no ",
+    (sqlerr, data) => {
+      if (sqlerr) {
+        res.send("Database Error");
+        console.log(sqlerr);
+      } else {
+        conn.query(
+          "SELECT tsc_no,full_mame FROM teachers",
+          (sqlerr, numbers) => {
+            res.render("attendance.ejs", {
+              Permissions: data,
+              Numbers: numbers,
+            });
+          }
+        );
       }
     }
   );
 });
 
 //POST ROUTES
+app.post("/teacherAttendance", (req, res) => {
+  console.log(req.body);
+  conn.query(
+    "INSERT INTO teacher_attendance(tsc_no,time_stamp,type) VALUES(?,?,?)",
+    [Number(req.body.tsc), req.body.time, req.body.type],
+    (sqlerr) => {
+      if (sqlerr) {
+        console.log(sqlerr);
+        res.send("A db error occured while adding new teacher attendance");
+      } else {
+        res.redirect("/attendance");
+      }
+    }
+  );
+});
+app.post("/studentpermission", (req, res) => {
+  console.log(req.body);
+  conn.query(
+    "INSERT INTO student_permission(reg_no,reason,time_out,exp_tme_in) VALUES(?,?,?,?)",
+    [Number(req.body.reg), req.body.reason, req.body.timeout, req.body.timein],
+    (sqlerr) => {
+      if (sqlerr) {
+        console.log(sqlerr);
+        res.send("A db error occured while adding new student permission");
+      } else {
+        res.redirect("/Studentpermissions");
+      }
+    }
+  );
+});
 
+app.post("/permission", (req, res) => {
+  //get the data from the client
+  //insert data into the db
+  console.log(req.body);
+  conn.query(
+    "INSERT INTO teacher_permission(tsc_no,reason,time_out,exp_tme_in) VALUES(?,?,?,?) ",
+    [Number(req.body.tsc), req.body.reason, req.body.timeout, req.body.timein],
+    (sqlerr) => {
+      if (sqlerr) {
+        console.log(sqlerr);
+        res.send("A DB error occured while saving new Teacher Permission");
+      } else {
+        res.redirect("/permissions");
+      }
+    }
+  );
+});
 app.post("/login", (req, res) => {
   //login - authenticate
   //- Receive passkey and tsc no
@@ -159,10 +265,10 @@ app.post("/login", (req, res) => {
           res.send("User with Tsc " + req.body.tsc + " does not exist");
         } else {
           console.log(dbresult); // sure tsc no exist in the db
-          if (bcrypt.compareSync(req.body.passkey, dbresult[0].passkey)) {
+          if (bcrypt.compareSync(req.body.pass, dbresult[0].passkey)) {
             //Create a session
             req.session.staff = dbresult[0];
-            req.session.cookie.expires = new Date(Date.now() + 10000); //16 minutes
+            req.session.cookie.expires = new Date(Date.now() + 1000000); //16 minutes
             res.redirect("/");
           } else {
             res.send("Incorrect password");

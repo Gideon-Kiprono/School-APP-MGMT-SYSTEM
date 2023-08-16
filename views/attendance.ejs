@@ -3,36 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Permissions</title>
+  <title>Teacher Attenance</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/permissions.css">
 </head>
 <body>
-  <%- include('_header.ejs')  %>
-  <h2 class="main.h">Permissions</h2>
+   <%- include('_header.ejs')  %>
+  <h2 class="main.h">Teacher Attendance</h2>
   <div class="flex">
     <div class="all-p">
       <table>
         <tr>
-          <th>TSC No</th>
+          <th>TSC NO</th>
           <th>Name</th>
-          <th>Reason</th>
-          <th>Time Out</th>
-          <th>Expected Time In</th>
+          <th>TIME </th>
+          <th>Type</th>
         </tr>
         <%Permissions.forEach(perm=>{ %>
           <tr>
             <td><%= perm.tsc_no %></td>
             <td><%= perm.full_mame %></td>
-            <td><%= perm.reason %></td>
-            <td><%= perm.time_out %></td>
-            <td><%= perm.exp_tme_in %></td>
+            <td><%= perm.time_stamp %></td>
+            <td><%= perm.type %></td>
           </tr>
           <% }) %>
       </table>
     </div>
     <div class="new-p">
-      <form action="/permission" method="post">
+      <form action="/teacherAttendance" method="post">
         <label for="tsc">TSC NO</label>
         <select name="tsc" id="tsc">
           <option value="">--Choose tsc no</option>
@@ -40,15 +38,12 @@
             <option value="<%=num.tsc_no %>"><%=num.full_mame %></option>
             <% }) %>
         </select>
-        <label for="reason">Reason</label>
-        <textarea name="reason" id="reason" cols="30" rows="10"></textarea>
+        <label for="time">Date & time</label>
+        <input type="datetime-local"name="time" id="time">
 
-        <label for="timeout">Date & timeout</label>
-        <input type="datetime-local"name="timeout" id="timeout">
-
-        <label for="timein">Date & timein</label>
-        <input type="datetime-local"name="timein" id="timein">
-        <input type="submit" value="Add Permission">
+        <label for="type">TYPE</label>
+        <input type="text"name="type" id="type">
+        <input type="submit" value="Update attenance">
       </form>
     </div>
   </div>
